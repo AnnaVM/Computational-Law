@@ -2,7 +2,6 @@ import os
 import re
 
 def get_files(folder_path):
-
 	file_paths = []
 	for root, dirs, files in os.walk(folder_path):
 		for filename in files:
@@ -17,7 +16,8 @@ def is_good_file(filename):
 		for filter_string in filename_filters:
 			if filter_string.lower() in filename.lower():
 				return False
-	return True
+		return True
+	return False
 
 def clean_file(filename):
 	lst_lines = []
@@ -26,9 +26,9 @@ def clean_file(filename):
 		raw_text = raw_text.replace('\xbc', '')\
 						   .replace('\xef', '')\
 						   .replace('\xbf', '')\
-						   .replace('\xe2\x80\x99', '')\
-						   .replace('\xe2\x80\x9c', '')\
-						   .replace('\xe2\x80\x9d', '')
+						   .replace('\xe2\x80\x99', "'")\
+						   .replace('\xe2\x80\x9c', '"')\
+						   .replace('\xe2\x80\x9d', '"')
 
 		for line in re.split(r'(?:\r|\n)', raw_text):
 			lst_lines.append(line)
