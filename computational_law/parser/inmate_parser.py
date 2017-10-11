@@ -7,6 +7,25 @@ from helper_functions.stitch_lines import stitching_lines
 class InmateParser(object):
 
     def __init__(self, filename):
+        '''
+        Parameter
+        ---------
+        filename: str
+                  filename of the transcript to be handled
+
+        Initializes
+        ----------
+        self.inmate: str (from title of transcript)
+        self.text: str (the actual text)
+        self.is_good: bool (is the filename indicative of a good file?)
+
+        Note
+        ----
+        Suggested sequence of events
+        ip = InmateParser(input_filename)
+        ip.parole_result()
+        ip.run()  or  ip.save_to_file(output_filename)
+        '''
         self.filename = filename
         m = re.search(r'[A-Z]\s?-?\d{5}', filename)
         self.inmate = m.group() if m else None
