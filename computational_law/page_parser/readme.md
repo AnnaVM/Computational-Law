@@ -45,7 +45,23 @@ lst_index_page = find_index_page(page_num_to_page)
 # Make the sections
 lst_sections = extract_section_information(lst_index_page)
 
-# Allow to look the pages.
+# Allow to look up the pages.
 max_page = max(page_to_clean_lines.keys())
 sections_to_page_nums = make_section_to_page_nums(section_information, max_page)
+```
+
+### How to use the PaegParser class
+
+```python
+filename = ../transcripts/2009/!A-32914.txt
+
+pp = PageParser(filename)
+
+# Allowing a page look-up
+pp.prepare_page_num_to_lines()
+pp.page_to_clean_lines
+
+# Allowing a section look-up
+pp.prepare_sections()
+pp.sections_to_page_nums
 ```
