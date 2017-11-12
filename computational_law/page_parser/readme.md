@@ -50,10 +50,10 @@ max_page = max(page_to_clean_lines.keys())
 sections_to_page_nums = make_section_to_page_nums(section_information, max_page)
 ```
 
-### How to use the PaegParser class
+### How to use the PageParser class
 
 ```python
-filename = ../transcripts/2009/!A-32914.txt
+filename = '../transcripts/2009/!A-32914.txt'
 
 pp = PageParser(filename)
 
