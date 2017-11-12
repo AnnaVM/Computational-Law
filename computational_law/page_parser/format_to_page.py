@@ -9,24 +9,24 @@ def clean_file(filename):
     Parameters
     ----------
     filename: str
-    
+
     Returns
     -------
     list of string
     '''
-	lst_lines = []
-	with open(filename, 'r') as f:
-		raw_text = f.read()
-		raw_text = raw_text.replace('\xbc', '')\
+    lst_lines = []
+    with open(filename, 'r') as f:
+        raw_text = f.read()
+        raw_text = raw_text.replace('\xbc', '')\
 						   .replace('\xef', '')\
 						   .replace('\xbf', '')\
 						   .replace('\xe2\x80\x99', "'")\
 						   .replace('\xe2\x80\x9c', '"')\
 						   .replace('\xe2\x80\x9d', '"')
 
-		for line in re.split(r'(?:\r|\n)', raw_text):
-			lst_lines.append(line)
-	return lst_lines
+        for line in re.split(r'(?:\r|\n)', raw_text):
+            lst_lines.append(line)
+    return lst_lines
 
 
 def make_pages(lst_lines):
