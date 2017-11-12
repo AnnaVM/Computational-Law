@@ -2,7 +2,7 @@ import os
 import re
 
 from collections import defaultdict, Counter
-from helper_functions.word_analysis import get_spacy, get_pos_json, find_ngrams
+from computational_law.text_analysis.word_analysis import get_spacy, get_pos_json, find_ngrams
 
 
 class WordAnalysis(object):
@@ -27,7 +27,7 @@ class WordAnalysis(object):
         wa.make_pos_json()
         wa.make_n_gram_list(2)
         '''
-        self.lst_dialog = lst_dialog
+        self.lst_dialog = lst_dialog if lst_dialog is not None else []
         if filename:
             with open(filename, 'r') as f:
                 self.text = f.read()
@@ -36,7 +36,8 @@ class WordAnalysis(object):
             self.text = '\n'.join(lst_dialog)
 
     def make_spacy_text(self):
-        self.spacy_text = get_spacy(self.text)
+
+        self.spacy_text = get_spacy(self.text.decode('utf-8'))
         return self.spacy_text
 
     def make_pos_json(self):
@@ -54,9 +55,13 @@ class WordAnalysis(object):
         if clean_up_options == None:
             input_list = re.split(r'\n|\s+', self.text)
         elif clean_up_options == 'spacy_words':
-            input_list = [tk.text for tk in self.make_spacy_text() if tk.is_punct]
+            input_list = [tk.text.strip() for tk in self.make_spacy_text()
+                          if not tk.is_punct and tk.text.strip()]
+        elif clean_up_options == 'spacy_words_no_stop':
+            input_list = [tk.text.strip() for tk in self.make_spacy_text()
+                          if not tk.is_punct and not tk.is_stop and tk.text.strip()]
         elif clean_up_options == 'lemma':
-            input_list = [tk.lemma_ for tk in self.make_spacy_text()]
+            input_list = [tk.lemma_.strip() for tk in self.make_spacy_text()]
         return find_ngrams(input_list, n=n)
 
 
