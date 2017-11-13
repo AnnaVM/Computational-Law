@@ -1,5 +1,7 @@
 # Inmate Parser
 
+There are several people that participate in the hearing parole process (Presiding Commissioner, Deputy Commissioner, Inmate, Attorney for Inmate...). This section allows us to study only the inmate's part of the dialog.
+
 ### Aim
 Taking in a list of clean lines, keep only what the inmate says, grouping the dialog that spans several lines.
 
